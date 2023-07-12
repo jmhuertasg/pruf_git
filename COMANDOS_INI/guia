@@ -1,0 +1,102 @@
+Para descargar de dockerhub 
+    Despues de instalar dockerhub en mi maquina podemos desde una ventana de comandos PowerShell lanzar los comandos
+        Ejem: Lista de imagenes
+            docker images
+
+            REPOSITORY                   TAG                          IMAGE ID       CREATED         SIZE
+            ansible                      latest                       b39c0a65e9fb   3 days ago      1.59GB
+            alvaroms/ubuntu-serverssh    v1                           f8fda4e9345a   6 days ago      220MB
+            ubuntu                       latest                       5a81c4b8502e   2 weeks ago     77.8MB
+            midocker                     latest                       c0e5d878e6b5   4 months ago    121MB
+            ubuntu                       <none>                       58db3edaf2be   5 months ago    77.8MB
+            nginx                        latest                       a99a39d070bf   6 months ago    142MB
+            docker                       dind                         0e865cd51cb0   6 months ago    322MB
+        
+        Ejem: descargar imagen
+            docker pull alpine   (descarga la ultima version)
+                Using default tag: latest
+                latest: Pulling from library/alpine
+                31e352740f53: Pull complete
+                Digest: sha256:82d1e9d7ed48a7523bdebc18cf6290bdb97b82302a8a9c27d4fe885949ea94d1
+                Status: Downloaded newer image for alpine:latest
+                docker.io/library/alpine:latest
+            docker images alpine
+                REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+                alpine       latest    c1aabb73d233   3 weeks ago   7.33MB
+            docker pull alpine:3.18.2
+                3.18.2: Pulling from library/alpine
+                Digest: sha256:82d1e9d7ed48a7523bdebc18cf6290bdb97b82302a8a9c27d4fe885949ea94d1
+                Status: Downloaded newer image for alpine:3.18.2
+                docker.io/library/alpine:3.18.2
+            docker images alpine
+                REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+                alpine       3.18.2    c1aabb73d233   3 weeks ago   7.33MB
+                alpine       latest    c1aabb73d233   3 weeks ago   7.33MB
+        Ejem: Eliminar imagenes
+            docker image rm alpine  o una etiqueta concreta    docker image rm alpine:3.18.2
+            docker images alpine
+                REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+                alpine       3.18.2    c1aabb73d233   3 weeks ago   7.33MB
+                alpine       latest    c1aabb73d233   3 weeks ago   7.33MB
+            docker image rm alpine:3.18.2
+                Untagged: alpine:3.18.2
+            docker images alpine
+                REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+                alpine       latest    c1aabb73d233   3 weeks ago   7.33MB
+
+        Ejem: Crear un contenedor en base a las imagenes que descargamos
+            docker pull mongo
+                Using default tag: latest
+                latest: Pulling from library/mongo
+                9d19ee268e0d: Extracting [============>                                      ]  7.864MB/30.43MB
+                84c1327991fa: Download complete
+                1feec59ecd14: Download complete
+                3af7480eaf55: Download complete
+                d7524ee16ced: Download complete
+                f4742175eefc: Download complete
+                9d688a8d9c18: Download complete
+                b24ebfb25f44: Downloading [===============>                                   ]  60.88MB/200.8MB
+                0ee52198e640: Download complete
+            docker create alpine
+                Unable to find image 'alpine:latest' locally
+                latest: Pulling from library/alpine
+                31e352740f53: Pull complete
+                Digest: sha256:82d1e9d7ed48a7523bdebc18cf6290bdb97b82302a8a9c27d4fe885949ea94d1
+                Status: Downloaded newer image for alpine:latest
+                614b4c56ca9657e663f560f430d52ad5f8e622129131c5042c7ab1d05493458a
+
+            docker container create alpine  (es lo mismo que el anterior)
+                0de09cb1ae9b4c92fd67c208188aae0ffaa458c63d294917993692040503fbbc
+        Ejem: Lanzar el contendorcreado
+            docker start 0de09cb1ae9b4c92fd67c208188aae0ffaa458c63d294917993692040503fbbc
+                0de09cb1ae9b4c92fd67c208188aae0ffaa458c63d294917993692040503fbbc
+        Ejem: Comprobar contenedores en ejecucion
+            docker ps -l
+                CONTAINER ID   IMAGE     COMMAND     CREATED          STATUS                      PORTS     NAMES
+                0de09cb1ae9b   alpine    "/bin/sh"   17 minutes ago   Exited (0) 10 minutes ago             quizzical_bell
+        Ejem: Parar los contendores
+            docker stop 0de09cb1ae9b
+                0de09cb1ae9b
+        Ejem: Mostrar todos los contenedores incluidos los parados
+            docker ps -a
+                CONTAINER ID   IMAGE             COMMAND     CREATED          STATUS                      PORTS     NAMES
+                0de09cb1ae9b   alpine            "/bin/sh"   28 minutes ago   Exited (0) 21 minutes ago             quizzical_bell
+                614b4c56ca96   alpine            "/bin/sh"   32 minutes ago   Exited (0) 17 minutes ago             clever_goldstine
+                96a98b124d8f   ubuntu_img:latest "bash"       8 days ago       Created                               sad_albattani                
+        Ejem: Eliminar container 
+            docker rm quizzical_bell  
+                quizzical_bell
+        
+       Ejem: Crear y arrancar container con nombre 
+            docker create --name alpinito alpine   
+                5d33c53abea03200239c3c893fa599b2654255d48e3cdf31eb122f54c596eb80           
+            docker start alpinito
+                alpinito
+            
+
+
+
+        Ejem:Descarga la ultima version
+            docker pull alpine
+                Ejem1:Descarga la ultima version
+            docker pull alpine    
